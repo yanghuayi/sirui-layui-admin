@@ -1,0 +1,113 @@
+// $('#sirui-table').dataTable({
+    //   'ajax': {
+    //     'url': '/api/client/getList',
+    //     'data': {"leixing":"","onOffline":"","terminalID":"","IMEI":"","barcode":"","softwarename":"","softwareversion":"","hardwareversion":"", "page": 1, "rows": 10 },
+    //     'dataSrc': 'rows',
+    //   },
+    //   "autoWidth": false,
+    //   'columns': [
+    //     {
+    //       'title': '接入端类型', 'data': 'CLIENTTYPE',
+    //       'render': function (data) {
+    //         var msg = "";
+    //         if (data == 1) {
+    //           msg = "TCUA/B";
+    //         } else if (data == 2) {
+    //           msg = "TCUC";
+    //         } else if (data == 3) {
+    //           msg = "OTU";
+    //         }
+    //         return "<span title=\""+msg+"\"  style='color:red'>" + msg + "</span>";
+    //       }
+    //     },
+    //     { 'title': 'entityID', 'data': 'ENTITYID' },
+    //     { 'title': 'IMEI', 'data': 'IMEI' },
+    //     { 'title': 'barCode', 'data': 'BARCODE' },
+    //     { 'title': '软件名称', 'data': 'SOFTWARENAME' },
+    //     { 'title': '软件版本号', 'data': 'SOFTWAREVERSION' },
+    //     { 'title': '硬件版本号', 'data': 'HARDWAREVERSION' },
+    //     { 'title': '运行bank', 'data': 'BANK' },
+    //     { 'title': '接入时间', 'data': 'LOGINTIME' },
+    //     { 'title': '离线', 'data': 'LASTMESSAGETIME' },
+    //     {
+    //       'title': '升级开始时间', 'data': 'STARTTIME',
+    //       render: function (data, type, row) {
+    //         if (row.CURRENT > 0) {//正在升级
+    //           return "<span style='color:red'>" + row.STARTTIME + "</span>";
+    //         } else {
+    //           return "<span style='color:gray'></span>";
+    //         }
+    //       }
+    //     }
+    //   ],
+    //   "language": {
+    //     "lengthMenu": "每页 _MENU_ 条记录",
+    //     "zeroRecords": "没有找到记录",
+    //     "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
+    //     "infoEmpty": "无记录",
+    //     "infoFiltered": "(从 _MAX_ 条记录过滤)",
+    //     "search":"搜索",
+    //     "processing" : "载入中",
+    //     "paginate" : {
+    //       "first" : "首页",
+    //       "previous" : "上一页",
+    //       "next" : "下一页",
+    //       "last" : "尾页"
+    //     }
+    //   },
+    // });
+    // table.render({
+    //   elem: '#sirui-table',
+    //   height: 700,
+    //   // even: true,
+    //   skin: 'nob',
+    //   size: 'lg',
+    //   url: '/api/client/getList',
+    //   where: {"leixing":"","onOffline":"","terminalID":"","IMEI":"","barcode":"","softwarename":"","softwareversion":"","hardwareversion":""},
+    //   request: {
+    //     pageName: 'page', //页码的参数名称，默认：page
+    //     limitName: 'rows' //每页数据量的参数名，默认：limit
+    //   },
+    //   response: {
+    //     statusName: 'nextToken',
+    //     dataName: 'rows',
+    //     countName: 'total',
+    //     statusCode: null
+    //   },
+    //   page: true,
+    //   cols: [[
+    //     {
+    //       field: 'CLIENTTYPE', title: '接入端类型', minWidth: 100,
+    //       templet: function (data) {
+    //         var msg = "";
+    //         if (data.CLIENTTYPE == 1) {
+    //           msg = "TCUA/B";
+    //         } else if (data.CLIENTTYPE == 2) {
+    //           msg = "TCUC";
+    //         } else if (data.CLIENTTYPE == 3) {
+    //           msg = "OTU";
+    //         }
+    //         return "<span title=\""+msg+"\"  style='color:red'>" + msg + "</span>";
+    //       }
+    //     },
+    //     { field: 'ENTITYID', title: 'entityID', minWidth: 80 },
+    //     { field: 'IMEI', title: 'IMEI', minWidth: 160 },
+    //     { field: 'BARCODE', title: 'barCode', minWidth: 180 },
+    //     { field: 'SOFTWARENAME', title: '软件名称', minWidth: 120 },
+    //     { field: 'SOFTWAREVERSION', title: '软件版本号', minWidth: 100 },
+    //     { field: 'HARDWAREVERSION', title: '硬件版本号', minWidth: 100  },
+    //     { field: 'BANK', title: '运行bank', minWidth:90  },
+    //     { field: 'LOGINTIME', title: '接入时间', minWidth: 100 },
+    //     { field: 'LASTMESSAGETIME', title: '离线', minWidth: 140 },
+    //     {
+    //       field: 'STARTTIME', title: '升级开始时间', minWidth: 140,
+    //       templet: function (data) {
+    //         if (data.CURRENT > 0) {//正在升级
+    //           return "<span style='color:red'>" + data.STARTTIME + "</span>";
+    //         } else {
+    //           return "<span style='color:gray'></span>";
+    //         }
+    //       }
+    //     },
+    //   ]],
+    // });
