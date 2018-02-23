@@ -565,7 +565,7 @@ html {
   width: 100%;
   border: none;
   height: 2px;
-  background-color: #40a9ff
+  background-color: #40a9ff !important;
 }
 
 .layadmin-tabspage-none .layui-layout-admin .layui-header {

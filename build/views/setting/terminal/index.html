@@ -3,7 +3,7 @@
 <!-- 普通搜索 -->
 <form class="layui-form sirui-filter" lay-filter="filter-normal-group">
   <div class="layui-row layui-col-space20">
-    <div class="layui-col-xs6 layui-col-md2">
+    <div class="layui-col-xs6 layui-col-lg2 layui-col-md3">
       <select name="leixing" palceholder="设备类型">
         <option value="">设备类型</option>
         <option value="3" selected>OTU</option>
@@ -11,20 +11,20 @@
         <option value="2">TCUC</option>
       </select>
     </div>
-    <div class="layui-col-xs6 layui-col-md2">
+    <div class="layui-col-xs6 layui-col-lg2 layui-col-md3">
       <select name="onOffline" palceholder="设备状态">
         <option value="">设备状态</option>
         <option value="1" selected>在线</option>
         <option value="0">离线</option>
       </select>
     </div>
-    <div class="layui-col-xs6 layui-col-md2">
+    <div class="layui-col-xs6 layui-col-lg2 layui-col-md3">
       <input type="text" name="terminalID" placeholder="设备ID" autocomplete="off" class="layui-input">
     </div>
-    <div class="layui-col-xs6 layui-col-md2">
+    <div class="layui-col-xs6 layui-col-lg2 layui-col-md3">
       <input type="text" name="IMEI" placeholder="IMEI" autocomplete="off" class="layui-input">
     </div>
-    <div class="layui-col-xs12 layui-col-md4">
+    <div class="filter-btn-wrap layui-col-xs12 layui-col-sm12 layui-col-md6 layui-col-lg4">
       <button class="layui-btn" lay-submit="" lay-filter="search">
         <i class="layui-icon m-r-5">&#xe615;</i>查询
       </button>
@@ -100,7 +100,7 @@
         <input type="text" name="hardwareversion" placeholder="硬件版本" autocomplete="off" class="layui-input">
       </div>
     </div>
-    <div class="layui-col-xs12 layui-col-md12">
+    <div class="filter-btn-wrap layui-col-xs12 layui-col-md12">
       <button class="layui-btn" lay-submit="" lay-filter="search">
         <i class="layui-icon m-r-5">&#xe615;</i>查询
       </button>
@@ -288,6 +288,15 @@
     form.render(null, 'filter-advanced-group');
     /* 监听提交 */
     form.on('submit(search)', function (data) {
+      /*  消息提示messsage插件 type: success|error|warning|info|loading 5个类型 */
+      var type = ['success', 'error', 'warning', 'info', 'loading'];
+      $('.ant-message').message({
+        type: type[parseInt((Math.random() * 5))],
+        content: '查询成功',
+        time: 2000,
+        onClose: function () {}
+      });
+      return false;
       setTimeout(function () {
         var filter = data.field;
         for (var i in tableParams) {
@@ -301,6 +310,7 @@
           $('#sirui-table').datagrid('loaded', true);
           initPage(data);
         });
+
       }, 50);
       return false;
     });
@@ -374,7 +384,10 @@
             if (data.result.resultCode == 3) {
               window.location.href = '#/user/login';
             }
-            layer.alert(data.result.resultMessage);
+            $('.ant-message').message({
+              type: 'error',
+              content: data.result.resultMessage
+            });
             $('#sirui-table').datagrid('loaded', true);
           } else {
             tableData = data.rows;
@@ -517,7 +530,7 @@
         count: data.total, //数据总数，从服务端得到
         limit: tableParams.rows, //每页显示的条数
         limits: [10, 20, 30, 40, 50], //每页条数的选择项。如果 layout 参数开启了 limit，则会出现每页条数的select选择框
-        layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'],
+        layout: document.body.clientWidth > 768 ? ['limit', 'count', 'prev', 'page', 'next', 'skip'] : ['prev', 'next', 'skip'],
         jump: function(obj, first) {
           // obj包含了当前分页的所有参数，比如：
           // console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。

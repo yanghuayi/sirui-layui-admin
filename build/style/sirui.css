@@ -111,7 +111,7 @@
 
 .sirui-table-wrap .layui-laypage {
   position: absolute;
-  width: 100%;
+  width: calc(100% - 40px);
   bottom: 0px;
   padding: 15px 20px 10px 20px;
   border-top: 1px solid #ececec;
@@ -124,8 +124,17 @@
   }
   .sirui-table-wrap .layui-laypage {
     position: relative;
-    width: auto;
+    width: calc(100% - 20px);
     padding: 10px;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .sirui-table-wrap .layui-laypage {
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
   }
 }
 
@@ -245,6 +254,9 @@
 .sirui-add-form {
   padding: 20px;
 }
+.sirui-edit-form {
+  padding: 20px;
+}
 
 @media screen and (max-width: 768px) {
   .sirui-add-form .layui-form-label {
@@ -259,6 +271,34 @@
   text-align: right;
 }
 
+.filter-btn-wrap {
+
+}
+.sirui-normal-link {
+  color: #40a9ff;
+}
+@media screen and (max-width: 768px) {
+  .filter-btn-wrap .layui-btn {
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px;
+    font-size: 12px;
+  }
+  .filter-btn-wrap .layui-btn i {
+    font-size: 16px !important;
+  }
+  .filter-btn-wrap .layui-btn.add-btn {
+    right: 10px;
+  }
+  .filter-btn-wrap .sirui-more-link,
+  .filter-btn-wrap .sirui-normal-link {
+    font-size: 12px;
+  }
+  .filter-btn-wrap .sirui-more-link i,
+  .filter-btn-wrap .sirui-normal-link i{
+    font-size: 14px;
+  }
+}
 
 
 
