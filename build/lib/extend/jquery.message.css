@@ -1,0 +1,127 @@
+@font-face {
+  font-family: 'iconfont';  /* project id 570214 */
+  src: url('//at.alicdn.com/t/font_570214_dut99kzlvoyldi.eot');
+  src: url('//at.alicdn.com/t/font_570214_dut99kzlvoyldi.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_570214_dut99kzlvoyldi.woff') format('woff'),
+  url('//at.alicdn.com/t/font_570214_dut99kzlvoyldi.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_570214_dut99kzlvoyldi.svg#iconfont') format('svg');
+}
+
+.msg-icon{
+  font-family:"iconfont" !important;
+  font-size:16px;font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ant-message {
+  font-family: "Monospaced Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.65);
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: fixed;
+  z-index: 1010;
+  width: 100%;
+  top: 16px;
+  left: 0;
+  pointer-events: none;
+}
+.ant-message-notice {
+  text-align: center;
+  opacity: 0;
+  max-height: 0;
+  padding: 0;
+  -webkit-transition: all .2s linear;
+  transition: all .2s linear;
+}
+.ant-message-notice:first-child {
+  margin-top: -8px;
+}
+.ant-message-notice-content {
+  padding: 10px 16px;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background: #fff;
+  display: inline-block;
+  pointer-events: all;
+}
+.ant-message-success .msg-icon {
+  color: #52c41a;
+}
+.ant-message-success .msg-icon::before {
+  content: '\e651';
+}
+.ant-message-error .msg-icon {
+  color: #f5222d;
+}
+.ant-message-error .msg-icon::before {
+  content: '\e657';
+}
+.ant-message-warning .msg-icon {
+  color: #faad14;
+}
+.ant-message-warning .msg-icon::before {
+  content: '\e682';
+}
+.ant-message-info .msg-icon,
+.ant-message-loading .msg-icon {
+  color: #1890ff;
+}
+.ant-message-info .msg-icon::before {
+  content: '\e6a7';
+}
+.ant-message-loading .msg-icon::before {
+  content: '\e6b4';
+  display: inline-block;
+  -webkit-animation: loadingCircle 1s infinite linear;
+  animation: loadingCircle 1s infinite linear;
+}
+
+@-webkit-keyframes loadingCircle {
+  0% {
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes loadingCircle {
+  0% {
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+
+.ant-message .msg-icon {
+  margin-right: 8px;
+  font-size: 16px;
+  top: 1px;
+  position: relative;
+}
+.ant-message-notice.show {
+  opacity: 1;
+  max-height: 150px;
+  padding: 8px;
+}

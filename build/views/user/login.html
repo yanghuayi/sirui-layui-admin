@@ -99,20 +99,20 @@ layui.use(['admin', 'form', 'user'], function(){
       success: function(data){
         if(data.result.resultCode) {
           // 登录失败提示
-          layer.msg(data.result.resultMessage, {
-            offset: '15px'
-            ,icon: 2
-            ,time: 1000
-          });
+          $('.ant-message').message({
+            type: 'error',
+            content: data.result.resultMessage
+          })
         } else {
           //登入成功的提示与跳转
-          layer.msg('登入成功', {
-            offset: '15px'
-            ,icon: 1
-            ,time: 1000
-          }, function(){
-            location.hash = search.redirect ? decodeURIComponent(search.redirect) : '/';
-          });
+          $('.ant-message').message({
+            type: 'success',
+            content: '登录成功',
+            time: 2000,
+            onClose: function () {
+              location.hash = search.redirect ? decodeURIComponent(search.redirect) : '/';
+            }
+          })
         }
         //请求成功后，写入 access_token
         // layui.data(setter.tableName, {
@@ -121,21 +121,13 @@ layui.use(['admin', 'form', 'user'], function(){
         // });
       },
       error: function(error) {
-        layer.msg(error.message, {
-          offset: '15px'
-          ,icon: 1
-          ,time: 1000
-        });
+        $('.ant-message').message({
+          type: 'error',
+          content: error.message
+        })
       }
     });
     
-  });
-  
-  
-  //实际使用时记得删除该代码
-  layer.msg('为了方便演示，用户名密码可随意输入', {
-    offset: '15px'
-    ,icon: 1
   });
   
 });
