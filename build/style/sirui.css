@@ -73,7 +73,7 @@
   background-color: #fff;
   margin: 10px;
   overflow: auto;
-  min-height: calc(100vh - 250px);
+  min-height: calc(100vh - 160px);
   position: relative;
   padding-bottom: 60px;
   transition: .4s all cubic-bezier(0.860, 0.15, 0.135, 0.785);
@@ -299,6 +299,8 @@
     font-size: 14px;
   }
 }
+
+
 
 
 

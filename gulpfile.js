@@ -48,7 +48,7 @@ gulp.task('clean', function () {
 gulp.task('connect', function () {
   connect.server({
     root: '',
-    host: '192.168.31.139',
+    host: '192.168.1.240',
     livereload: true,
     port: 8084,
     middleware: function(connect, opt) {

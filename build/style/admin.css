@@ -95,6 +95,9 @@ html {
   overflow: hidden;
   overflow-y: auto;
   opacity: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
 }
 
 .layui-layout-admin .layui-body .layadmin-tabsbody-item.layui-show {
@@ -307,7 +310,7 @@ html {
 
 .layui-side-menu .layui-nav .layui-nav-item>a {
   padding-top: 8px;
-  padding-bottom: 8px
+  padding-bottom: 8px;
 }
 
 .layui-side-menu .layui-nav .layui-nav-item a:hover {
