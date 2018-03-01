@@ -39,9 +39,7 @@ layui.define("view", function(e) {
 			removeTabs (obj) {
 				if (obj.prop('tagName') == 'IFRAME') {
 					obj.attr('src', '');
-					setTimeout(function () {
-						obj.remove();
-					}, 50);
+					obj.remove();
 				} else {
 					obj.remove();
 				}

@@ -11,22 +11,47 @@ layui.extend({
 		i = layui.admin,
 		t = i.tabsPage,
 		l = layui.view,
+		externalFun = function (addDOM, y, path) {
+			var o, r = s("#LAY_app_tabsheader>li");
+			if (!a.pageTabs) {
+				s(d).html(addDOM);
+			}
+			r.each(function(e) {
+				var a = s(this),
+					n = a.attr("lay-id");
+				n === y && (o = !0, t.index = e)
+			}), a.pageTabs && "/" !== y && (o || (s(d).append(addDOM), t.index = r.length, n.tabAdd(u, {
+				title: "<span>" + (path.title || "新标签页") + "</span>",
+				id: y,
+				attr: e.href
+			}))), this.container = i.tabsBody(t.index), n.tabChange(u, y), i.tabsBodyChange(t.index);
+			layui.use("common", layui.cache.callback.common), c.on("resize", layui.data.resize), n.render("breadcrumb", "breadcrumb"), i.tabsBody(t.index).on("scroll", function() {
+				var e = s(this),
+					a = s(".layui-laydate"),
+					n = s(".layui-layer")[0];
+				a[0] && (a.each(function() {
+					var e = s(this);
+					e.hasClass("layui-laydate-static") || e.remove()
+				}), e.find("input").blur()), n && layer.closeAll("tips")
+			})
+		},
 		o = function() {
 			var e = layui.router(),
 				r = e.path,
 				y = i.correctRouter(e.path.join("/"));
 			var path = getPath(r);
-			var addDOM = path.iframe ? '<iframe class="layadmin-tabsbody-item layui-show" src="' + path.url + '"></iframe>' :
+			var addDOM = path.iframe || path.external ? '<iframe class="layadmin-tabsbody-item layui-show" src="' + path.url + '"></iframe>' :
 			'<div class="layadmin-tabsbody-item layui-show"></div>';
 			r.length || (r = [""]), "" === r[r.length - 1] && (r[r.length - 1] = a.entry);
 			var h = function(e) {
 					o.haveInit && layer.closeAll(), o.haveInit = !0, s(d).scrollTop(0), delete t.type
 				};
-			return "tab" === t.type && ("/" !== y || "/" === y && i.tabsBody().html()) ? (i.tabsBodyChange(t.index), h(t.type)) : (l().render(path.url, {}, true).then(function(l) {
+			return "tab" === t.type && ("/" !== y || "/" === y && i.tabsBody().html()) ? (i.tabsBodyChange(t.index), h(t.type)) : path.external ? externalFun(addDOM, y,path) : (l().render(path.url, {}, true).then(function(l) {
 				var o, r = s("#LAY_app_tabsheader>li");
 				if (!a.pageTabs) {
 					s(d).html(addDOM);
 				}
+				path.external ? l.title = path.title : null;
 				r.each(function(e) {
 					var a = s(this),
 						n = a.attr("lay-id");

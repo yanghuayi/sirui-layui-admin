@@ -101,7 +101,7 @@
           ,url = (item.jump && typeof item.jump === 'string') ? item.jump : item.name;
           }}
           <li data-name="{{ item.name || '' }}" data-jump="{{ item.jump || '' }}" class="layui-nav-item {{ classSelected() }}">
-            <a href="javascript:;" {{ hasChildren ? '' : 'lay-href="'+ url +'"' }} {{ item.iframe ? 'lay-iframe="true"' : '' }} {{ item.url ? 'lay-url="'+ item.url +'"' : ''}} lay-tips="{{ item.title }}" lay-direction="2">
+            <a href="javascript:;" {{ item.external ? 'lay-external="true"' : '' }} {{ hasChildren ? '' : 'lay-href="'+ url +'"' }} {{ item.iframe ? 'lay-iframe="true"' : '' }} {{ item.url ? 'lay-url="'+ item.url +'"' : ''}} lay-tips="{{ item.title }}" lay-direction="2">
             <i class="layui-icon {{ item.icon }}"></i>
             <cite>{{ item.title }}</cite>
             </a>
@@ -123,7 +123,7 @@
               }}
               <dd  data-name="{{ item2.name || '' }}"  data-jump="{{ item2.jump || '' }}"
                    {{ classSelected2() ? ('class="'+ classSelected2() +'"') : '' }}>
-              <a href="javascript:;" {{ item2.url ? 'lay-url="'+ item2.url +'"' : ''}} {{ item2.iframe ? 'lay-iframe="true"' : '' }} {{ hasChildren2 ? '' : 'lay-href="'+ url2 +'"' }}>{{ item2.title }}</a>
+              <a href="javascript:;" {{ item2.external ? 'lay-external="true"' : '' }} {{ item2.url ? 'lay-url="'+ item2.url +'"' : ''}} {{ item2.iframe ? 'lay-iframe="true"' : '' }} {{ hasChildren2 ? '' : 'lay-href="'+ url2 +'"' }}>{{ item2.title }}</a>
               {{# if(hasChildren2){ }}
               <dl class="layui-nav-child">
                 {{# layui.each(item2.list, function(index3, item3){
@@ -135,7 +135,7 @@
                 }}
                 <dd data-name="{{ item3.name || '' }}"  data-jump="{{ item3.jump || '' }}"
                     {{ match ? 'class="layui-this"' : '' }}>
-                <a href="javascript:;" lay-href="{{ url3 }}" {{ item3.url ? 'lay-url="'+ item3.url +'"' : ''}} {{ item3.iframe ? 'lay-iframe="true"' : '' }}>{{ item3.title }}</a>
+                <a href="javascript:;" {{ item3.external ? 'lay-external="true"' : '' }} lay-href="{{ url3 }}" {{ item3.url ? 'lay-url="'+ item3.url +'"' : ''}} {{ item3.iframe ? 'lay-iframe="true"' : '' }}>{{ item3.title }}</a>
                 </dd>
                 {{# }); }}
               </dl>
