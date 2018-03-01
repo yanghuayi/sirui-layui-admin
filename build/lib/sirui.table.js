@@ -6,12 +6,13 @@ var siruiTable = {
   tableConfig: {},
   tableID: '#sirui-table',
   url: '',
-  init: function ($, tableParams, url, layer, laypage, form, tableConfig) {
+  init: function ($, tableParams, url, layer, laypage, form, tableConfig, tableID) {
     var self = this;
     this.tableConfig = tableConfig;
     this.laypage = laypage;
     this.initTableParams = tableParams;
     this.tableParams = tableParams;
+    this.tableID = tableID ? tableID : '#sirui-table';
     this.url = url;
     this.getData($, tableParams, url, function (data) {
       self.initTable(data);

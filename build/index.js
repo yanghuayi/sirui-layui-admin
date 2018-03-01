@@ -56,7 +56,7 @@ layui.extend({
 				if (d === a) return n = !0
 			}), layui.config({
 				base: a.base + "controller/"
-			}), n || "/user/login" === d) r.render('/user/login.html').done(function() {
+			}), n || "/user/login" === d) r.render(t.path.join("/") + '.html').done(function() {
 				i.pageType = "alone"
 			});
 			else {

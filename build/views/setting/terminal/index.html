@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="/layui/css/layui-iframe.css">
-  <link rel="stylesheet" href="/build/style/class.css">
-  <link rel="stylesheet" href="/build/style/easyui.css">
-  <link rel="stylesheet" href="/build/style/sirui.css">
-  <link rel="stylesheet" href="/build/lib/extend/jquery.message.css">
+  <link rel="stylesheet" href="../../../../layui/css/layui-iframe.css">
+  <link rel="stylesheet" href="../../../style/class.css">
+  <link rel="stylesheet" href="../../../style/easyui.css">
+  <link rel="stylesheet" href="../../../style/sirui.css">
+  <link rel="stylesheet" href="../../../lib/extend/jquery.message.css">
   <title>设备管理（升级/调试）</title>
 </head>
 <body>
@@ -266,18 +266,17 @@
       </div>
     </form>
   </div>
-  <script src="/layui/layui.js"></script>
-  <script src="/build/lib/extend/jquery.min.js"></script>
-  <!--<script src="/build/lib/extend/jquery.easyui.min.js"></script>-->
-  <script src="/build/lib/extend/jquery.parser.js"></script>
-  <script src="/build/lib/extend/jquery.panel.js"></script>
-  <script src="/build/lib/extend/jquery.linkbutton.js"></script>
-  <script src="/build/lib/extend/jquery.resizable.js"></script>
-  <script src="/build/lib/extend/jquery.draggable.js"></script>
-  <script src="/build/lib/extend/jquery.pagination.js"></script>
-  <script src="/build/lib/extend/jquery.datagrid.js"></script>
-  <script src="/build/lib/extend/jquery.message.js"></script>
-  <script src="/build/lib/sirui.table.js"></script>
+  <script src="../../../../layui/layui.js"></script>
+  <script src="../../../lib/extend/jquery.min.js"></script>
+  <script src="../../../lib/extend/jquery.parser.js"></script>
+  <script src="../../../lib/extend/jquery.panel.js"></script>
+  <script src="../../../lib/extend/jquery.linkbutton.js"></script>
+  <script src="../../../lib/extend/jquery.resizable.js"></script>
+  <script src="../../../lib/extend/jquery.draggable.js"></script>
+  <script src="../../../lib/extend/jquery.pagination.js"></script>
+  <script src="../../../lib/extend/jquery.datagrid.js"></script>
+  <script src="../../../lib/extend/jquery.message.js"></script>
+  <script src="../../../lib/sirui.table.js"></script>
   <script>
     layui.config({
       base: '/build/' //指定 layuiAdmin 项目路径
@@ -289,9 +288,7 @@
         , laydate = layui.laydate
         , laypage = layui.laypage
         , form = layui.form;
-      // 保存表格数据
-      var tableData = [];
-      // 表格参数
+      // 筛选参数
       var tableParams = {
         leixing: "3",
         onOffline: "1",
@@ -304,6 +301,7 @@
         page: 1,
         rows: 10
       };
+      // 表格参数
       var tableConfig = {
           loadMsg: '正在加载 ，请稍候！',
           emptyMsg: '<span class="emptyTxt">对不起，暂无符合数据!</span>',
@@ -482,7 +480,6 @@
         $('.edit-btn').click(function () {
           var index = $('#sirui-table').datagrid('getRowIndex', $(this).attr('data-id'));
           var rowData = siruiTable.tableData[index];
-          // for ()
           layer.open({
             type: 1,
             title: '编辑设备',
