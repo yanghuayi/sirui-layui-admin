@@ -1,4 +1,11 @@
 /** layuiAdmin-v1.0.0-beta6 LPPL License By http://www.layui.com/admin/ */
+/* tabs 菜单bug修复 */
+/* #LAY_app_tabsheader {
+  left: 0 !important;
+} */
+.layui-tab-title li {
+  background-color: #fff;
+}
 
 html #layuicss-layuiAdmin {
   display: none;
@@ -302,15 +309,10 @@ html {
 }
 
 .layui-side-menu .layui-nav .layui-nav-item a {
-  height: 40px;
-  line-height: 40px;
+  height: 46px;
+  line-height: 46px;
   padding-left: 45px;
   padding-right: 30px
-}
-
-.layui-side-menu .layui-nav .layui-nav-item>a {
-  padding-top: 8px;
-  padding-bottom: 8px;
 }
 
 .layui-side-menu .layui-nav .layui-nav-item a:hover {
@@ -325,7 +327,7 @@ html {
   position: absolute;
   top: 50%;
   left: 20px;
-  margin-top: -19px
+  margin-top: -22px
 }
 
 .layui-side-menu .layui-nav .layui-nav-child .layui-nav-child {

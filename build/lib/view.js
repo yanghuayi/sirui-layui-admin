@@ -73,37 +73,30 @@ layui.define(["laytpl", "layer"], function(e) {
 			anim: 6,
 			id: "LAY_adminError"
 		}, a))
-	}, d.prototype.render = function(e, a) {
-    var n = this;
-    return e = r.views + e + r.engine, t("#" + s).children(".layadmin-loading").remove(), i.loading(n.container), t.ajax({
-      url: e,
-      type: "get",
-      dataType: "html",
-      data: {
-        v: layui.cache.version
-      },
-      success: function(e) {
-        e = "<div>" + e + "</div>";
-        var r = t(e).find("title"),
-          o = r.text(),
-          s = {
-            title: o,
-            body: e
-          };
-        r.remove(), n.params = a || {}, n.then && (n.then(s), delete n.then), n.parse(e), i.removeLoad(), n.done && (n.done(s), delete n.done)
-      },
-      error: function(e) {
-        return i.removeLoad(), n.render.isError ? i.error("请求视图文件异常，状态：" + e.status) : (404 === e.status ? n.render("template/tips/404") : n.render("template/tips/error"), void(n.render.isError = !0))
-      }
-    }), n
-    // var tabsBody = t(n.container[0].lastChild);
-    // var whiteArr = ['layout', 'index'];
-    // console.log(e);
-    // if (whiteArr.indexOf(e) !== -1) {
-      
-    // } else {
-    //   return e = r.views + e + r.engine, t("#" + s).children(".layadmin-loading").remove(), i.loading(n.container), n, t(n.container[0].lastChild).attr('src', e);
-    // }
+	}, d.prototype.render = function(e, a, other) {
+		var n = this;
+		layui.router();
+		return e = other ? e : r.views + e, t("#" + s).children(".layadmin-loading").remove(), i.loading(n.container), t.ajax({
+			url: e,
+			type: "get",
+			dataType: "html",
+			data: {
+				v: layui.cache.version
+			},
+			success: function(e) {
+				e = "<div>" + e + "</div>";
+				var r = t(e).find("title"),
+					o = r.text(),
+					s = {
+						title: o,
+						body: e
+					};
+				r.remove(), n.params = a || {}, n.then && (n.then(s), delete n.then), n.parse(e), i.removeLoad(), n.done && (n.done(s), delete n.done)
+			},
+			error: function(e) {
+				return i.removeLoad(), n.render.isError ? i.error("请求视图文件异常，状态：" + e.status) : (404 === e.status ? n.render("template/tips/404") : n.render("template/tips/error"), void(n.render.isError = !0))
+			}
+		}), n
 	}, d.prototype.parse = function(e, n, r) {
 		var s = this,
 			d = "object" == typeof e,
@@ -120,12 +113,11 @@ layui.define(["laytpl", "layer"], function(e) {
 					console.error(e.dataElem[0], "\n存在错误回调脚本\n\n", o)
 				}
 			},
-      y = layui.router();
-      if (s.container.prop('tagName') !== 'IFARME') {
-        l.find("title").remove(), s.container[n ? "after" : "html"](l.children()), y.params = s.params || {};
-      } else {
-				l.find("title").remove(), y.params = s.params || {};
-      }
+			y = layui.router();
+			if (s.container.prop('tagName') !== 'IFRAME') {
+				s.container[n ? "after" : "html"](l.children());
+			}
+		l.find("title").remove(), y.params = s.params || {};
 		for (var p = u.length; p > 0; p--)!
 		function() {
 			var e = u.eq(p - 1),
@@ -163,8 +155,7 @@ layui.define(["laytpl", "layer"], function(e) {
 		}();
 		return s
 	}, d.prototype.send = function(e, t) {
-    var n = a(e || this.container.html()).render(t || {});
-    console.log(n);
+		var n = a(e || this.container.html()).render(t || {});
 		return this.container.html(n), this
 	}, d.prototype.refresh = function(e) {
 		var t = this,

@@ -15,7 +15,7 @@ layui.define(['laytpl', 'layer', 'element', 'util'], function(exports){
     ,entry: 'index' //默认视图文件名
     ,engine: '.html' //视图文件后缀名
     ,pageTabs: true //是否开启页面选项卡功能
-
+    ,mobileTabs: false // 移动端是否展示tab功能
     ,name: '思锐运维系统'
     ,tableName: 'siruiAdmin' //本地存储表名
     ,MOD_NAME: 'admin' //模块事件名

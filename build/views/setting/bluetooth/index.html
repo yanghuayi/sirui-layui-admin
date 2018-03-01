@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="/build/style/easyui.css">
   <link rel="stylesheet" href="/build/style/sirui.css">
   <link rel="stylesheet" href="/build/lib/extend/jquery.message.css">
-  <title>设备管理（升级/调试）</title>
+  <title>蓝牙设备调试</title>
 </head>
 <body>
   <!-- 普通搜索 -->
@@ -194,7 +194,7 @@
           </div>
         </div>
         <div class="layui-col-xs12 layui-col-md12 sirui-add-btn-group">
-          <button class="layui-btn" lay-submit="" lay-filter="addSubmit"><i class="layui-icon">&#xe605;</i>提交</button>
+          <button class="layui-btn" lay-submit="" lay-filter="add"><i class="layui-icon">&#xe605;</i>提交</button>
         </div>
       </div>
     </form>
@@ -277,11 +277,10 @@
   <script src="/build/lib/extend/jquery.pagination.js"></script>
   <script src="/build/lib/extend/jquery.datagrid.js"></script>
   <script src="/build/lib/extend/jquery.message.js"></script>
-  <script src="/build/lib/sirui.table.js"></script>
   <script>
     layui.config({
-      base: '/build/' //指定 layuiAdmin 项目路径
-      , version: '1.1.2'
+      base: './build/' //指定 layuiAdmin 项目路径
+      , version: '1.0.1'
     }).use(['form', 'laydate', 'laypage'], function () {
       var $ = layui.$
         , element = layui.element
@@ -304,7 +303,132 @@
         page: 1,
         rows: 10
       };
-      var tableConfig = {
+      // 初始化表格
+      getData($, tableParams, layer, function (data) {
+        initTable(data);
+        $('.sirui-loading').fadeOut();
+      });
+      /* 初始化渲染筛选表单 */
+      form.render(null, 'filter-normal-group');
+      form.render(null, 'filter-advanced-group');
+      /* 监听提交 */
+      form.on('submit(search)', function (data) {
+        /*  消息提示messsage插件 type: success|error|warning|info|loading 5个类型 */
+        var type = ['success', 'error', 'warning', 'info', 'loading'];
+        $('.ant-message').message({
+          type: type[parseInt((Math.random() * 5))],
+          content: '查询成功',
+          time: 2000,
+          onClose: function () {}
+        });
+        return false;
+        setTimeout(function () {
+          var filter = data.field;
+          for (var i in tableParams) {
+            if (filter[i]) {
+              tableParams[i] = filter[i];
+            }
+          }
+          $('#sirui-table').datagrid('loading', true);
+          getData($, tableParams, layer, function (data) {
+            $('#sirui-table').datagrid('loadData', data.rows);
+            $('#sirui-table').datagrid('loaded', true);
+            initPage(data);
+          });
+  
+        }, 50);
+        return false;
+      });
+  
+    //  重置搜索
+      form.on('submit(reset)', function (data) {
+        tableParams = {
+          leixing: "",
+          onOffline: "",
+          terminalID: "",
+          IMEI: "",
+          barcode: "",
+          softwarename: "",
+          softwareversion: "",
+          hardwareversion: "",
+          page: 1,
+          rows: 10
+        };
+        $('#sirui-table').datagrid('loading', true);
+        getData($, tableParams, layer, function(data) {
+          $('#sirui-table').datagrid('loadData', data.rows);
+          $('#sirui-table').datagrid('loaded', true);
+          initPage(data);
+        });
+        return false;
+      });
+      // 新增打开事件
+      form.on('submit(add)', function (data) {
+        layer.open({
+          type: 1,
+          title: '新增设备',
+          area: ['1000px', 'auto'],
+          content: $('#addPage').html()
+        });
+        // 初始化渲染新增表单
+        form.render(null, 'add-form-group');
+        return false;
+      });
+      // 编辑提交事件
+      form.on('submit(update)', function(data) {
+        layer.open({
+          type: 1,
+          title: '提交信息',
+          content: JSON.stringify(data.field)
+        });
+        return false;
+      });
+  
+      /* 搜索展开 */
+      $('.sirui-more-link').click(function () {
+        $(this).parents('.sirui-filter').css('top','-' + $(this).parents('.sirui-filter').height() + 'px');
+        $('.sirui-filter-all').addClass('show');
+        $('.sirui-table-wrap').css('margin-top', ($('.sirui-filter-all').height() - $(this).parents('.sirui-filter').height() + 10) + 'px');
+      });
+      /* 搜索关闭 */
+      $('.sirui-normal-link').click(function () {
+        $(this).parents('.sirui-filter-all').removeClass('show');
+        $('.sirui-filter').css('top', '0');
+        $('.sirui-table-wrap').css('margin-top', '10px');
+      });
+      // ajax 获取数据
+      function getData($, filterData, layer, callback) {
+        $.ajax({
+          type: 'POST',
+          // url: 'http://maintain.mysirui.com:40000/client/getList',
+          // dataType: 'jsonp',
+          url: '/api/client/getList',
+          data: filterData,
+          success: function (data) {
+            if (data.result) {
+              if (data.result.resultCode == 3) {
+                window.parent.goLogin();
+              }
+              $('.ant-message').message({
+                type: 'error',
+                content: data.result.resultMessage
+              });
+              $('#sirui-table').datagrid('loaded', true);
+            } else {
+              tableData = data.rows;
+              callback(data);
+            }
+          },
+          error: function (err) {
+            layer.alert('请求错误');
+            $('#sirui-table').datagrid('loaded', true);
+          }
+        });
+      }
+      // 初始化表格
+      function initTable(data) {
+        $('#sirui-table').datagrid({
+          data: data.rows,
           loadMsg: '正在加载 ，请稍候！',
           emptyMsg: '<span class="emptyTxt">对不起，暂无符合数据!</span>',
           remoteSort: false,
@@ -421,27 +545,36 @@
           onLoadSuccess: function () {
             initOpreat();
           }
-        };
-      // 表格初始化函数
-      siruiTable.init($, tableParams, '/api/client/getList', layer, laypage, form, tableConfig);
-      // 新增提交事件
-      form.on('submit(addSubmit)', function(data) {
-        layer.open({
-          type: 1,
-          title: '提交信息',
-          content: JSON.stringify(data.field)
         });
-        return false;
-      });
-      // 编辑提交事件
-      form.on('submit(update)', function(data) {
-        layer.open({
-          type: 1,
-          title: '提交信息',
-          content: JSON.stringify(data.field)
+        initPage(data);
+      }
+      // 初始化分页
+      function initPage(data) {
+        laypage.render({
+          elem: 'table_laypage', //注意，这里的 test1 是 ID，不用加 # 号
+          count: data.total, //数据总数，从服务端得到
+          limit: tableParams.rows, //每页显示的条数
+          limits: [10, 20, 30, 40, 50], //每页条数的选择项。如果 layout 参数开启了 limit，则会出现每页条数的select选择框
+          layout: document.body.clientWidth > 768 ? ['limit', 'count', 'prev', 'page', 'next', 'skip'] : ['prev', 'next', 'skip'],
+          jump: function(obj, first) {
+            // obj包含了当前分页的所有参数，比如：
+            // console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+            // console.log(obj.limit); //得到每页显示的条数
+            if (first) return false;
+            tableParams.page = obj.curr;
+            tableParams.rows = obj.limit;
+            setTimeout(function () {
+              $('#sirui-table').datagrid('loading', true);
+              getData($, tableParams, layer, function (data) {
+                $('#sirui-table').datagrid('loadData', data.rows);
+                $('#sirui-table').datagrid('loaded', true);
+              });
+            }, 0);
+            return false;
+          }
         });
-        return false;
-      });
+      }
+  
       // 编辑表单数据对应参数
       var editdataType = {
           leixing: {
@@ -481,7 +614,7 @@
       function initOpreat () {
         $('.edit-btn').click(function () {
           var index = $('#sirui-table').datagrid('getRowIndex', $(this).attr('data-id'));
-          var rowData = siruiTable.tableData[index];
+          var rowData = tableData[index];
           // for ()
           layer.open({
             type: 1,
