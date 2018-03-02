@@ -1078,7 +1078,7 @@
   padding:9px
  }
  .layui-col-space20 {
-  margin:-10px
+  margin: 0px
  }
  .layui-col-space20>* {
   padding:10px

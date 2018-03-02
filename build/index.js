@@ -132,7 +132,7 @@ layui.extend({
 	}),
 	// 获取menu
 	s.ajax({
-		url: '/json/menu.js',
+		url: './json/menu.js',
 		dataType: 'text/html',
 		success: function (data) {
 			console.log(data);

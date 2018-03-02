@@ -22,7 +22,7 @@ html, body{
 }
 .sirui-filter {
   background-color: #fff;
-  padding: 20px;
+  padding: 10px;
   transition: .5s all cubic-bezier(0.785, 0.135, 0.15, 0.86);
   position: relative;
   top: 0;
@@ -45,7 +45,7 @@ html, body{
   color: #40a9ff;
 }
 .sirui-filter-all {
-  padding: 20px;
+  padding: 10px;
   background-color: #fff;
   position: absolute;
   width: calc('100% - 40px');
@@ -261,13 +261,13 @@ html, body{
 
 .layui-layer {
   max-width: calc(100% - 20px);
-  max-height: 100%;
+  max-height: calc(100% - 20px);
 }
 .sirui-add-form {
-  padding: 20px;
+  padding: 10px;
 }
 .sirui-edit-form {
-  padding: 20px;
+  padding: 10px;
 }
 
 @media screen and (max-width: 768px) {
